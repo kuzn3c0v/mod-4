@@ -31,10 +31,10 @@
 
             <!-- Preview Image -->
             <div class="img-news col-md-6">
-                <img class="img-responsive" src="{{asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $data->img_url)}}" alt="">
+                <img class="img-responsive" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $data->img_title) }}" alt="">
                 <!-- Date/Time -->
                 <div style="background-color: whitesmoke; color: black; padding-left: 5px; border-radius: 0 0 4px 4px">
-                <p><i class="fa fa-clock-o"></i> Опубликовано {{date_format($data->created_at, 'd-m-Y H:i:s')}}</p>
+                <p><i class="fa fa-clock-o"></i> Опубликовано {{ date_format($data->created_at, 'd-m-Y H:i:s') }}</p>
                 </div>
             </div>
 

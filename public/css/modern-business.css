@@ -127,7 +127,7 @@ footer {
     background-color: #000521;
     text-align: left;
     overflow: hidden;
-    height: 76px;
+    height: 80px;
     padding-left: 15px;
     margin-bottom: 1px;
 }
@@ -160,12 +160,6 @@ footer {
 }
 
 
-/* todo удалить потом, тест для колонок снизу в индексе*/
-.test-news{
-    overflow: hidden;
-    height: 199px;
-}
-
 .img-news{  /* Настройки для картинки новостей (не в карусели) справа отступ */
     padding: 0;
     margin-right: 10px;
@@ -184,29 +178,51 @@ footer {
     color: black;
 }
 
-.avatar{
-    display: inline-block;
-    float: left;
-    height: 55px;
-    margin: 2px 9px 0 0;
-    overflow: hidden;
-    width: 55px;
+/* Раздел всех новостей на главной */
+
+.all-news-panel{
+    margin-top: 20px;
+    border-color: #000521;
+    background-color: #000521;
+    color: white;
 }
 
-.avatar img{
-    width: 55px;
+.tabs-header{
+
 }
+.tabs-header a{
+    color: white;
+}
+
+.tabs-header a:hover{
+    background-color: gray;
+    color: black;
+}
+
+.tabs-header a:active{
+    color: black;
+}
+
+.img-news-tabs{
+    float: left;
+    width: 75px;
+    margin: 5px 10px 5px 0;
+}
+
+.btn-blog-index{
+    margin-top: 10px;
+    background-color: white;
+    color: black;
+}
+
+
+/* --------------- */
 
 
 .all-news-row{
     padding-left: 20px;
 }
 
-.btn-blog-index{
-    margin-top: 2px;
-    background-color: #000521;
-    color: white;
-}
 
 .btn-blog-index:hover{
     background-color: rgba(0, 5, 54, 0.67);

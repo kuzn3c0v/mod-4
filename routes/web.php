@@ -21,5 +21,3 @@ Route::get('/', 'IndexController@index');
 Route::get('news', 'NewsController@index');
 
 Route::get('news/{id}', 'NewsController@show')->name('newsShow'); // Указываем псевдоним
-
-Route::get('blogs', 'BlogsController@index');
