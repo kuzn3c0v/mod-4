@@ -8,11 +8,11 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> Новости Украины и мира</h1>
+            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> {{ $cat->categories }}</h1>
             <ol class="breadcrumb">
                 <li><a href="/">Главная</a>
                 </li>
-                <li><a href="/news/">Новости Украины и мира</a>
+                <li><a href="/news/{{ $cat->desc }}">{{ $cat->categories }}</a>
                 </li>
                 <li class="active">{{ $data->title }}</li>
             </ol>

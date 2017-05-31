@@ -3,24 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\News_cat;
 use Illuminate\Http\Request;
+
 
 class NewsController extends Controller
 {
-    public function index(){
-        $news = News::select('id', 'title', 'text', 'img_title', 'created_at')
-            ->orderBy('created_at','desc') // TODO: Сделать отображение только 20 страниц пагинации
-            ->paginate(10);
+    public function newsByCat($cat){
 
-        return view('all-news', compact('news'));
+        $catId = News_cat::select('id', 'categories')
+            ->where('desc', $cat)
+            ->first();
+
+
+        $news = News_cat::find($catId->id)
+            ->news()
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('cat-news', compact('news', 'catId'));
 
     }
 
-    public function show($id){
-       //$data = News::find($id);  find ищет по первичному ключу
+    public function oneNews($id){
 
-        $data = News::select('id', 'title', 'text', 'img_title', 'created_at')->where('id', $id)->first(); // Выбираем
-        // определенные поля, где id = $id, только первую запись first()
-        return view('one-news', compact('data'));
+        $data = News::select('id', 'title', 'text','news_cat_id', 'img_title', 'created_at')
+            ->where('id', $id)
+            ->first();
+
+        $cat = $data->news_cat;
+
+        return view('one-news', compact('data', 'cat'));
     }
 }

@@ -3,30 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\News_cat;
+use App\Traits\newsPicExist;
 use Illuminate\Http\Request;
 
 
 class IndexController extends Controller
 {
-    public function index(){
-        
+    use newsPicExist;
 
-        //$a = News::all(); получить все записи из таблицы news
-        $data = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
+    public function index(){
+
+        // Новости для карусели
+        $carousel = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
             ->orderBy('created_at','desc')
-            ->take(5)
+            ->take(4)
             ->get();
 
-        // Проверка есть ли такая картинка
-        $path = public_path('pictures' . DIRECTORY_SEPARATOR . 'news');
-        foreach ($data as $da){
-            if ((!file_exists($path . DIRECTORY_SEPARATOR . $da->img_title)) || empty($da->img_title)){
-                // Если нет, то присвоим стандартную
-                $da->img_title = 'Spare-picture-700x450.jpg';
-            }
+        // Проверка картинки для новости
+        $this->newsPicExist($carousel);
+
+        // Новости по категории
+        // Получаем все категории новостей
+        $newsCategories = News_cat::all();
+
+        // С помощью foreach каждой категории присвоим 5 последних новостей этой категории
+        foreach ($newsCategories as $key => $category){
+            $category['newsList'] = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
+                ->where('news_cat_id', '=', $category->id)
+                ->orderBy('created_at','desc')
+                ->take(5)
+                ->get();
+
+            // Проверка картинки для новости
+            $this->newsPicExist($category['newsList']);
         }
 
-        return view('index', compact('data')); // Формируем шаблон. Первый аргумент название (.blade.php писать
-        // не надо), второй аргумент мы передаем переменные которые будут доступны в представлинии
+
+        return view('index', compact('carousel', 'newsCategories'));
     }
 }

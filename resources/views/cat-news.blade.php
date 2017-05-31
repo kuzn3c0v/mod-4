@@ -8,11 +8,11 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> Новости Украины и мира</h1>
+            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> {{ $catId->categories }}</h1>
             <ol class="breadcrumb">
                 <li><a href="/">Главная</a>
                 </li>
-                <li class="active">Новости Украины и мира</li>
+                <li class="active">{{ $catId->categories }}</li>
             </ol>
         </div>
     </div>
@@ -23,9 +23,9 @@
         <div class="col-lg-9" >
             @foreach($news as $onenews)
                 <div class="row all-news-row">
-                    <a href="{{route('newsShow', ['id' => $onenews->id])}}" class="unlink-text">
+                    <a href="{{ route('oneNews', ['id' => $onenews->id]) }}" class="unlink-text">
                         <div class="img-news col-md-3">
-                            <img class="img-responsive img-hover" src="{{asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $onenews->img_url)}}" alt="">
+                            <img class="img-responsive img-hover" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $onenews->img_title) }}" alt="">
                         </div>
 
                         <div class="all-news-content">

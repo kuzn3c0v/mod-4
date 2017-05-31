@@ -18,6 +18,6 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('news', 'NewsController@index');
+Route::get('news/{cat}', 'NewsController@newsByCat')->name('newsByCat');
 
-Route::get('news/{id}', 'NewsController@show')->name('newsShow'); // Указываем псевдоним
+Route::get('show/{id}', 'NewsController@oneNews')->name('oneNews'); // Указываем псевдоним
