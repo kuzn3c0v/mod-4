@@ -8,11 +8,18 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> {{ $catId->categories }}</h1>
+
+            @if(isset($section->categories))
+                <!-- {{ $header = $section->categories }} -->
+            @else
+                <!-- {{ $header = 'Все новости по тегу : ' . $section->name }} -->
+            @endif
+
+            <h1 class="page-header"><i class="fa fa-list-alt fa-1x"></i> {{ $header }}</h1>
             <ol class="breadcrumb">
                 <li><a href="/">Главная</a>
                 </li>
-                <li class="active">{{ $catId->categories }}</li>
+                <li class="active">{{ $header }}</li>
             </ol>
         </div>
     </div>
@@ -114,12 +121,14 @@
     <hr>
 
 
-<!-- Pagination -->
+    <!-- Pagination -->
     <div class="row text-center">
         <div class="col-lg-12">
             {{ $news->links() }}
         </div>
     </div>
+    <!-- /.Pagination -->
+
 </div>
 
 @endsection

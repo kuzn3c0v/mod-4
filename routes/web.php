@@ -20,4 +20,6 @@ Route::get('/', 'IndexController@index');
 
 Route::get('news/{cat}', 'NewsController@newsByCat')->name('newsByCat');
 
-Route::get('show/{id}', 'NewsController@oneNews')->name('oneNews'); // Указываем псевдоним
+Route::get('show/{id}', 'NewsController@oneNews')->name('oneNews');
+
+Route::get('/news/tags/{id}', 'NewsController@newsByTag')->name('newsByTag');

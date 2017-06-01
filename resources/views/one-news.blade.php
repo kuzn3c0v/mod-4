@@ -44,6 +44,19 @@
 
             <hr>
 
+            <!-- Тэги новостей -->
+            @if(count($tag))
+            <p style="display: inline-block">
+                <strong style="margin-right: 5px">Теги: </strong>
+                @foreach($tag as $t)
+                    <form action="/news/tags/{{ $t->id }}" style="display: inline-block">
+                        <button type="submit" class="btn btn-outline btn-primary btn-xs">{{ $t->name }}</button>
+                    </form>
+                @endforeach
+            </p>
+            @endif
+
+
             <!-- Blog Comments -->
 
             <!-- Comments Form -->

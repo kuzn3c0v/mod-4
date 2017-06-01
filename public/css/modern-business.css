@@ -229,3 +229,9 @@ footer {
     padding-left: 20px;
 }
 
+/* Кнопка для тегов новостей */
+.btn-outline {
+    color: inherit;
+    background-color: transparent;
+    transition: all .5s;
+}

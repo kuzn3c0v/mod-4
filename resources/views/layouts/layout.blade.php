@@ -57,16 +57,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/news/">Новости</a>
-                </li>
-                <li>
-                    <a href="#">Блоги</a>
-                </li>
-                <li>
-                    <a href="#">Фотожабы</a>
-                </li>
-                <li>
-                    <a href="#">Голосования</a>
+                    <a href="/">Новости</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>

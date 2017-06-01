@@ -30,7 +30,7 @@ class IndexController extends Controller
         // С помощью foreach каждой категории присвоим 5 последних новостей этой категории
         foreach ($newsCategories as $key => $category){
             $category['newsList'] = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
-                ->where('news_cat_id', '=', $category->id)
+                ->where('news_cat_id', $category->id)
                 ->orderBy('created_at','desc')
                 ->take(5)
                 ->get();
@@ -38,7 +38,6 @@ class IndexController extends Controller
             // Проверка картинки для новости
             $this->newsPicExist($category['newsList']);
         }
-
 
         return view('index', compact('carousel', 'newsCategories'));
     }

@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use App\News;
 use App\News_cat;
+use App\Tag;
+use App\Traits\newsPicExist;
 use Illuminate\Http\Request;
 
 
 class NewsController extends Controller
 {
+    use newsPicExist;
+
     public function newsByCat($cat){
 
-        $catId = News_cat::select('id', 'categories')
+        $section = News_cat::select('id', 'categories')
             ->where('desc', $cat)
             ->first();
 
 
-        $news = News_cat::find($catId->id)
+        $news = News_cat::find($section->id)
             ->news()
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        return view('cat-news', compact('news', 'catId'));
+        $this->newsPicExist($news);
+
+        return view('news-list', compact('news', 'section'));
 
     }
 
@@ -31,8 +37,23 @@ class NewsController extends Controller
             ->where('id', $id)
             ->first();
 
+        $this->newsPicExist($data);
+
         $cat = $data->news_cat;
 
-        return view('one-news', compact('data', 'cat'));
+        $tag = $data->news_tag()->get();
+
+        return view('one-news', compact('data', 'cat', 'tag'));
+    }
+
+    public function newsByTag($id){
+
+        $section = Tag::find($id);
+
+        $news = $section->tag_news()
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('news-list', compact('news', 'section'));
     }
 }
