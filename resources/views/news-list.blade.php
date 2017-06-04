@@ -28,19 +28,19 @@
     <!-- News list -->
     <div class="row">
         <div class="col-lg-9" >
-            @foreach($news as $onenews)
+            @foreach($news as $one)
                 <div class="row all-news-row">
-                    <a href="{{ route('oneNews', ['id' => $onenews->id]) }}" class="unlink-text">
+                    <a href="{{ route('oneNews', ['id' => $one->id]) }}" class="unlink-text">
                         <div class="img-news col-md-3">
-                            <img class="img-responsive img-hover" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $onenews->img_title) }}" alt="">
+                            <img class="img-responsive img-hover" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $one->img_title) }}" alt="">
                         </div>
 
                         <div class="all-news-content">
-                            <h3 class="all-news-title">{{ $onenews->title }}</h3>
-                            <h5><i class="fa fa-clock-o"></i> {{ date_format($onenews->created_at, 'd-m-Y H:i:s') }}</h5>
+                            <h3 class="all-news-title">{{ $one->title }}</h3>
+                            <h5><i class="fa fa-clock-o"></i> {{ date_format($one->created_at, 'd-m-Y H:i:s') }}</h5>
 
                             <!-- Post Content -->
-                            <p>{!! mb_substr($onenews->text, 0, 150) !!}...</p>
+                            <p>{!! mb_substr($one->text, 0, 150) !!}...</p>
                         </div>
                     </a>
                 </div>

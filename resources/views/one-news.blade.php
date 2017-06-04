@@ -14,7 +14,7 @@
                 </li>
                 <li><a href="/news/{{ $cat->desc }}">{{ $cat->categories }}</a>
                 </li>
-                <li class="active">{{ $data->title }}</li>
+                <li class="active">{{ $oneNews->title }}</li>
             </ol>
         </div>
     </div>
@@ -25,36 +25,44 @@
 
         <!-- Blog Post Content Column -->
         <div class="col-lg-9">
-            <h3 style="margin: 0 0 20px 0">{{ $data->title }}</h3>
+            <h3 style="margin: 0 0 20px 0">{{ $oneNews->title }}</h3>
 
             <!-- Blog Post -->
 
             <!-- Preview Image -->
             <div class="img-news col-md-6">
-                <img class="img-responsive" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $data->img_title) }}" alt="">
+                <img class="img-responsive" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $oneNews->img_title) }}" alt="">
                 <!-- Date/Time -->
                 <div style="background-color: whitesmoke; color: black; padding-left: 5px; border-radius: 0 0 4px 4px">
-                <p><i class="fa fa-clock-o"></i> Опубликовано {{ date_format($data->created_at, 'd-m-Y H:i:s') }}</p>
+                <i class="fa fa-clock-o"></i> Опубликовано {{ date_format($oneNews->created_at, 'd-m-Y H:i:s') }}
                 </div>
             </div>
 
 
             <!-- Post Content -->
-            <p>{!! $data->text !!}</p>
+            {!! $oneNews->text !!}
 
             <hr>
+            <!-- Кол-во читающих новость -->
+            <div class="tag-cont">
+                <i class="fa fa-eye"></i>
+                Читают эту новость <span class="badge" id="rd-now"></span>
+                Всего просмотров <span class="badge" id="rd-count"></span>
+
+            </div>
 
             <!-- Тэги новостей -->
             @if(count($tag))
-            <p style="display: inline-block">
-                <strong style="margin-right: 5px">Теги: </strong>
-                @foreach($tag as $t)
-                    <form action="/news/tags/{{ $t->id }}" style="display: inline-block">
-                        <button type="submit" class="btn btn-outline btn-primary btn-xs">{{ $t->name }}</button>
-                    </form>
-                @endforeach
-            </p>
+                <div class="tag-cont">   <!-- todo убрать тег p -->
+                    <strong style="margin-right: 5px">Теги: </strong>
+                    @foreach($tag as $t)
+                        <form action="/news/tags/{{ $t->id }}" style="display: inline-block">
+                            <button type="submit" class="btn btn-outline btn-primary btn-xs">{{ $t->name }}</button>
+                        </form>
+                    @endforeach
+                </div>
             @endif
+
 
 
             <!-- Blog Comments -->
@@ -124,8 +132,8 @@
                 <div class="input-group">
                     <input type="text" class="form-control">
                     <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                        </span>
+                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    </span>
                 </div>
                 <!-- /.input-group -->
             </div>

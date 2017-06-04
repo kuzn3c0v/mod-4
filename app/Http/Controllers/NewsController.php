@@ -33,17 +33,17 @@ class NewsController extends Controller
 
     public function oneNews($id){
 
-        $data = News::select('id', 'title', 'text','news_cat_id', 'img_title', 'created_at')
+        $oneNews = News::select('id', 'title', 'text','news_cat_id', 'img_title', 'created_at')
             ->where('id', $id)
             ->first();
 
-        $this->newsPicExist($data);
+        $this->newsPicExist($oneNews);
 
-        $cat = $data->news_cat;
+        $cat = $oneNews->news_cat;
 
-        $tag = $data->news_tag()->get();
+        $tag = $oneNews->news_tag()->get();
 
-        return view('one-news', compact('data', 'cat', 'tag'));
+        return view('one-news', compact('oneNews', 'cat', 'tag'));
     }
 
     public function newsByTag($id){
@@ -55,5 +55,19 @@ class NewsController extends Controller
             ->paginate(5);
 
         return view('news-list', compact('news', 'section'));
+    }
+
+    public function viewed(){
+
+        $viewed = News::find($_POST['id']);
+
+        $viewed_number = $viewed->viewed + $_POST['watch_now'];
+
+        $viewed->viewed = $viewed->viewed + $_POST['watch_now'];
+
+        $viewed->save();
+
+        return $viewed->viewed;
+
     }
 }

@@ -22,4 +22,8 @@ Route::get('news/{cat}', 'NewsController@newsByCat')->name('newsByCat');
 
 Route::get('show/{id}', 'NewsController@oneNews')->name('oneNews');
 
-Route::get('/news/tags/{id}', 'NewsController@newsByTag')->name('newsByTag');
+Route::get('news/tags/{id}', 'NewsController@newsByTag')->name('newsByTag');
+
+Route::post('news/viewed', 'NewsController@viewed');
+
+Route::post('search', 'SearchController@searchBar');

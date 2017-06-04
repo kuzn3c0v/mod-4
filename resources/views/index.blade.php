@@ -202,13 +202,13 @@
                         @foreach($newsCategories as $news)
                             <div class="tab-pane fade @if($active)  in active @endif " id="{{ $news->desc }}">
 
-                                @foreach($news['newsList'] as $oneNews)
+                                @foreach($news['newsList'] as $oneNewsCat)
                                 <div class="list-group news-list">
-                                    <a href="{{ route('oneNews', ['id' => $oneNews->id]) }}" class="list-group-item" style="height: 80px; border-radius:0">
-                                        <img class="img-responsive img-news-tabs" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $oneNews->img_title) }}" alt="">
-                                        <small>{{ date_format($oneNews->created_at, 'd-m-Y H:i:s') }}</small>
+                                    <a href="{{ route('oneNews', ['id' => $oneNewsCat->id]) }}" class="list-group-item" style="height: 80px; border-radius:0">
+                                        <img class="img-responsive img-news-tabs" src="{{ asset('pictures' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . $oneNewsCat->img_title) }}" alt="">
+                                        <small>{{ date_format($oneNewsCat->created_at, 'd-m-Y H:i:s') }}</small>
                                         <p>
-                                            <strong>{{ $oneNews->title }}</strong>
+                                            <strong>{{ $oneNewsCat->title }}</strong>
                                         </p>
                                     </a>
                                 </div>

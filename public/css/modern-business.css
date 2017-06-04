@@ -235,3 +235,8 @@ footer {
     background-color: transparent;
     transition: all .5s;
 }
+
+.tag-cont{
+    display: block;
+    margin-bottom: 15px;
+}
