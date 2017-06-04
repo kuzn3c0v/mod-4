@@ -196,7 +196,6 @@
         var srch = $('#searchBar');
         srch.keyup(function(){ // При вводе символов строку поиска
             $.post('/search', {letters: srch.val()}).done(function (data) {
-//                var allTags = JSON.parse(data); // Записываем полученные данные
                 searchInLine(data);  // Запускаем функцию вставки найденных совпавдений
             });
 
@@ -228,6 +227,24 @@
             $('form').submit(function() { window.onbeforeunload = null; });
         });
 
+        /*-------------------------------------------------------------------------------------------*/
+        /*----------------------------------|Реклама|------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------*/
+
+        var adv = $('.adv');
+        adv.mouseover(function () {
+            $(this).children('.adv-price').text('1599 гривен');
+            $(this).children('.adv-price').css({'color': 'red', 'fontSize': '22px'});
+        });
+        adv.popover({
+            'trigger': 'hover',
+            'placement': 'top',
+            delay: { show: 500, hide: 100 }
+        });
+        adv.mouseout(function() {
+            $(this).children('.adv-price').text('1999 гривен');
+            $(this).children('.adv-price').css({'color': 'black', 'fontSize': '18px'});
+        });
     });
 
 

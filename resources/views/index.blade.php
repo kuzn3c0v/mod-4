@@ -11,7 +11,7 @@
         <!-- Реклама -->
         <div class="col-md-3">
 
-            <h2 class="page-header"><i class="fa fa-shopping-cart fa-1x"></i> Реклама</h2>
+            <h2 class="page-header"> Реклама</h2>
 
             @include('adv')
 
@@ -101,7 +101,7 @@
         </div>
 
         <div class="col-md-3">
-            <h2 class="page-header"><i class="fa fa-shopping-cart fa-1x"></i> Реклама</h2>
+            <h2 class="page-header"> Реклама</h2>
 
             @include('adv')
 
