@@ -27,3 +27,7 @@ Route::get('news/tags/{id}', 'NewsController@newsByTag')->name('newsByTag');
 Route::post('news/viewed', 'NewsController@viewed');
 
 Route::post('search', 'SearchController@searchBar');
+
+Route::post('comment', 'CommentsController@post')->name('postComment');
+
+Auth::routes();

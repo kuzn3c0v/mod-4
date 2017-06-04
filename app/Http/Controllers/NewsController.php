@@ -6,6 +6,7 @@ use App\News;
 use App\News_cat;
 use App\Tag;
 use App\Traits\newsPicExist;
+use App\Comment;
 use Illuminate\Http\Request;
 
 
@@ -15,12 +16,11 @@ class NewsController extends Controller
 
     public function newsByCat($cat){
 
-        $section = News_cat::select('id', 'categories')
-            ->where('desc', $cat)
+        $section = News_cat::where('desc', $cat)
             ->first();
 
 
-        $news = News_cat::find($section->id)
+        $news = News_cat::findOrFail($section->id)
             ->news()
             ->orderBy('created_at', 'desc')
             ->paginate(5);
@@ -33,8 +33,7 @@ class NewsController extends Controller
 
     public function oneNews($id){
 
-        $oneNews = News::select('id', 'title', 'text','news_cat_id', 'img_title', 'created_at')
-            ->where('id', $id)
+        $oneNews = News::where('id', $id)
             ->first();
 
         $this->newsPicExist($oneNews);
@@ -43,12 +42,14 @@ class NewsController extends Controller
 
         $tag = $oneNews->news_tag()->get();
 
-        return view('one-news', compact('oneNews', 'cat', 'tag'));
+        $comments = $oneNews->comments()->get();
+
+        return view('one-news', compact('oneNews', 'cat', 'tag', 'comments'));
     }
 
     public function newsByTag($id){
 
-        $section = Tag::find($id);
+        $section = Tag::findOrFail($id);
 
         $news = $section->tag_news()
             ->orderBy('created_at', 'desc')
@@ -58,16 +59,17 @@ class NewsController extends Controller
     }
 
     public function viewed(){
+        if (isset($_POST['id'])){
 
-        $viewed = News::find($_POST['id']);
+            $viewed = News::findOrFail($_POST['id']);
 
-        $viewed_number = $viewed->viewed + $_POST['watch_now'];
+            $viewed->viewed = $viewed->viewed + $_POST['watch_now'];
 
-        $viewed->viewed = $viewed->viewed + $_POST['watch_now'];
+            $viewed->save();
 
-        $viewed->save();
-
-        return $viewed->viewed;
-
+            return $viewed->viewed;
+        }else{
+            return false;
+        }
     }
 }

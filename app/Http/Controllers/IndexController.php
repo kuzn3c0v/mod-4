@@ -15,8 +15,7 @@ class IndexController extends Controller
     public function index(){
 
         // Новости для карусели
-        $carousel = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
-            ->orderBy('created_at','desc')
+        $carousel = News::latest('created_at')
             ->take(4)
             ->get();
 
@@ -29,9 +28,8 @@ class IndexController extends Controller
 
         // С помощью foreach каждой категории присвоим 5 последних новостей этой категории
         foreach ($newsCategories as $key => $category){
-            $category['newsList'] = News::select(['id', 'title', 'text', 'img_title', 'created_at'])
+            $category['newsList'] = News::latest('created_at')
                 ->where('news_cat_id', $category->id)
-                ->orderBy('created_at','desc')
                 ->take(5)
                 ->get();
 

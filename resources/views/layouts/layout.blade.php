@@ -53,6 +53,33 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">UrbanNews.com.ua</a>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ route('login') }}">Войти</a></li>
+                    <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Выйти
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+            </ul>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,10 +92,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Full Width Page</a>
+                            <a href="#">First page</a>
                         </li>
                         <li>
-                            <a href="#">Sidebar Page</a>
+                            <a href="#">Second Page</a>
                         </li>
                         <li>
                             <a href="#">FAQ</a>
@@ -77,7 +104,7 @@
                             <a href="#">404</a>
                         </li>
                         <li>
-                            <a href="#">Pricing Table</a>
+                            <a href="#">One more page</a>
                         </li>
                     </ul>
                 </li>
@@ -148,7 +175,9 @@
                 // Делаем запрос, передаем туда кол-во пользователей читающих эту новость (через ген случайных
                 // чисел). Получаем обратно общее количество просмотров за все время.
                 $.post('/news/viewed',{id: news_id, watch_now: random}).done(function (data) {
-                    $('#rd-count').text(data); // Читающих за все время
+                    if (data){
+                        $('#rd-count').text(data); // Читающих за все время
+                    }
                 });
                 readNow.text(random); // Читающих сейчас
             }
@@ -167,8 +196,8 @@
         var srch = $('#searchBar');
         srch.keyup(function(){ // При вводе символов строку поиска
             $.post('/search', {letters: srch.val()}).done(function (data) {
-                var allTags = JSON.parse(data); // Записываем полученные данные
-                searchInLine(allTags);  // Запускаем функцию вставки найденных совпавдений
+//                var allTags = JSON.parse(data); // Записываем полученные данные
+                searchInLine(data);  // Запускаем функцию вставки найденных совпавдений
             });
 
             function searchInLine(allTags) {
