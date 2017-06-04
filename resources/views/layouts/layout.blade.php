@@ -196,7 +196,6 @@
         var srch = $('#searchBar');
         srch.keyup(function(){ // При вводе символов строку поиска
             $.post('/search', {letters: srch.val()}).done(function (data) {
-//                var allTags = JSON.parse(data); // Записываем полученные данные
                 searchInLine(data);  // Запускаем функцию вставки найденных совпавдений
             });
 
